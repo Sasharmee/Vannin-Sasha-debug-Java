@@ -20,7 +20,7 @@ public class AnalyticsCounter {
 	
 }
 
-	public Map<String, Integer> countSymptoms(){
+	public Map<String, Integer> countSymptoms(List<String> symptoms){
 		Map<String, Integer> countSymptoms = new HashMap<String, Integer>(); 
 		for(String symptom : getSymptoms()) { 
 			int count = countSymptoms.getOrDefault(symptom, 0);

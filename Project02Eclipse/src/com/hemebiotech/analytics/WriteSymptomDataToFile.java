@@ -9,10 +9,15 @@ import java.io.IOException;
 
 public class WriteSymptomDataToFile implements ISymptomWriter {
 
+	private String filepath;
+	
+	public WriteSymptomDataToFile(String filepath) {
+		this.filepath=filepath;
+	}
 
 	@Override
 	public void writeSymptoms(Map<String, Integer> symptoms) {
-		try(BufferedWriter writer = new BufferedWriter(new FileWriter("result.out"))){
+		try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))){
 			for(HashMap.Entry<String, Integer> Symptoms : symptoms.entrySet()) { 
 				writer.write(Symptoms.getKey() + " : " + Symptoms.getValue());
 				writer.newLine(); //revenir à la ligne
