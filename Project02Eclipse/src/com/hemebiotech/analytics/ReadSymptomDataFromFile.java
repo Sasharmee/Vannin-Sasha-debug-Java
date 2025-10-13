@@ -6,28 +6,42 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-
+/**
+ * Simple brute force implementation of ISymptomReader.
+ * 
+ * Reads data from a file and return a List of Strings which are the symptoms.
+ * List is not sorted and may contain duplications. 
+ * 
+ */
 public class ReadSymptomDataFromFile implements ISymptomReader {
 
-	private String filepath;
-	
+	private String filePath;
+
 	/**
+	 * Gives a path toward the file. 
 	 * 
-	 * @param filepath a full or partial path to file with symptom strings in it, one per line
+	 * @param filepath a full or partial path to file with symptom strings in it, one per line.
 	 */
-	public ReadSymptomDataFromFile (String filepath) {
-		this.filepath = filepath;
+	public ReadSymptomDataFromFile(String filePath) {
+		this.filePath = filePath;
 	}
-	
+
+	/**
+	 * Reads the symptoms from a given file.
+	 * 
+	 * if an IOException occurs, the stack trace is printed
+	 * 
+	 * @return a List of Strings which are the symptoms. 
+	 * 
+	 */
 	@Override
 	public List<String> getSymptoms() {
 		ArrayList<String> result = new ArrayList<String>();
-		
-		if (filepath != null) {
-			try {
-				BufferedReader reader = new BufferedReader (new FileReader(filepath));
+
+		if (filePath != null) {
+			try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
 				String line = reader.readLine();
-				
+
 				while (line != null) {
 					result.add(line);
 					line = reader.readLine();
@@ -37,7 +51,7 @@ public class ReadSymptomDataFromFile implements ISymptomReader {
 				e.printStackTrace();
 			}
 		}
-		
+
 		return result;
 	}
 
